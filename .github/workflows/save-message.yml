@@ -1,0 +1,37 @@
+name: Save message
+
+on:
+  repository_dispatch:
+    types: [new_message]
+
+jobs:
+  save:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Save message
+        run: |
+          mkdir -p messages
+          echo '${{ github.event.client_payload.json }}' > messages/message-${{ github.run_id }}.json
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add messages/
+          git commit -m "New message"
+          git push
+
+      - name: Send email
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          subject: "Nuevo mensaje desde convo.solutions"
+          to: "hola@convo.solutions"
+          from: "convo bot"
+          body: "Nuevo mensaje recibido. Revisa la carpeta /messages en tu repo."

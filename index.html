@@ -2,42 +2,57 @@
 <html>
 <head>
     <title>convo</title>
+
+    <!-- Configuración básica -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+
+    <!-- Estilos del tema Astral -->
     <link rel="stylesheet" href="assets/css/main.css" />
     <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 </head>
+
 <body class="is-preload">
 
+<!-- WRAPPER GENERAL -->
 <div id="wrapper">
 
+    <!-- NAVEGACIÓN SUPERIOR -->
     <nav id="nav">
         <a href="#" class="icon solid fa-home"><span>convo</span></a>
         <a href="#work" class="icon solid fa-folder"><span>ejemplos</span></a>
         <a href="#contact" class="icon solid fa-envelope"><span>contacto</span></a>
     </nav>
 
+    <!-- CONTENIDO PRINCIPAL -->
     <div id="main">
 
+        <!-- SECCIÓN HOME -->
         <article id="home" class="panel intro">
             <header>
                 <h1>convo</h1>
                 <p>un marketing para todos</p>
             </header>
+
+            <!-- Botón para ir a ejemplos -->
             <a href="#work" class="jumplink pic">
                 <span class="arrow icon solid fa-chevron-right"><span>cotillea un poco</span></span>
                 <img src="images/me.jpg" alt="" />
             </a>
         </article>
 
+        <!-- SECCIÓN EJEMPLOS -->
         <article id="work" class="panel">
             <header><h2>clientes felices</h2></header>
             <p>servicios de marketing donde no trabajamos para tí, trabajamos contigo</p>
 
+            <!-- GRID DE IMÁGENES -->
             <section>
                 <div class="row">
 
-                    <!-- 12 imágenes con textos -->
+                    <!-- Cada imagen tiene un data-text que se mostrará en el viewer -->
+                    <!-- Repite este patrón para las 12 imágenes -->
+
                     <div class="col-4 col-6-medium col-12-small">
                         <a href="#" class="image fit" data-text="Proyecto 1: Branding y estrategia visual.">
                             <img src="images/pic01.jpg" alt="">
@@ -114,9 +129,11 @@
             </section>
         </article>
 
+        <!-- SECCIÓN CONTACTO -->
         <article id="contact" class="panel">
             <header><h2>cuéntanos</h2></header>
 
+            <!-- FORMULARIO QUE ENVÍA DATOS A GITHUB ACTIONS -->
             <form id="convoForm">
                 <div class="row">
                     <div class="col-6 col-12-medium">
@@ -145,6 +162,7 @@
 
     </div>
 
+    <!-- FOOTER -->
     <div id="footer">
         <ul class="copyright">
             <li>&copy; convo</li>
@@ -153,21 +171,34 @@
 
 </div>
 
-<!-- LIGHTBOX -->
+<!-- VIEWER / LIGHTBOX -->
+<!-- Este es el visor que aparece al hacer clic en una imagen -->
 <div id="lightbox" class="lightbox">
+
+    <!-- Botón de cierre -->
     <span class="close">&times;</span>
 
+    <!-- Contenedor principal del viewer -->
     <div class="lightbox-content">
 
+        <!-- Flechas de navegación (solo móvil) -->
         <div class="nav-arrow left-arrow">&#10094;</div>
         <div class="nav-arrow right-arrow">&#10095;</div>
 
+        <!-- Columna izquierda: imagen + miniaturas -->
         <div class="lightbox-left">
+
+            <!-- Miniaturas superiores (solo desktop) -->
             <div class="thumbs top-thumbs"></div>
+
+            <!-- Imagen ampliada -->
             <img class="lightbox-img" src="" alt="">
+
+            <!-- Miniaturas inferiores (solo desktop) -->
             <div class="thumbs bottom-thumbs"></div>
         </div>
 
+        <!-- Columna derecha: texto del proyecto -->
         <div class="lightbox-right">
             <h3 class="lightbox-title"></h3>
             <p class="lightbox-text"></p>
@@ -176,65 +207,149 @@
     </div>
 </div>
 
+<!-- ESTILOS DEL VIEWER -->
 <style>
+/* Fondo oscuro del viewer */
 .lightbox {
-    display:none; position:fixed; z-index:9999; padding-top:40px;
-    left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.85);
+    display:none;
+    position:fixed;
+    z-index:9999;
+    padding-top:40px;
+    left:0; top:0;
+    width:100%; height:100%;
+    background:rgba(0,0,0,0.85);
 }
+
+/* Contenedor principal del viewer */
 .lightbox-content {
-    width:90%; max-width:1200px; margin:auto; background:#111; padding:20px;
-    border-radius:10px; display:flex; gap:30px; height:80vh; align-items:center;
+    width:90%;
+    max-width:1200px;
+    margin:auto;
+    background:#111;
+    padding:20px;
+    border-radius:10px;
+    display:flex;
+    gap:30px;
+    height:80vh;
+    align-items:center;
     position:relative;
 }
+
+/* Columna izquierda */
 .lightbox-left {
-    width:60%; display:flex; flex-direction:column; justify-content:center;
-    align-items:center; height:100%;
+    width:60%;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    height:100%;
 }
+
+/* Columna derecha (panel blanco) */
 .lightbox-right {
-    width:40%; background:#fff; color:#000; padding:30px; border-radius:10px;
-    height:100%; overflow-y:auto;
+    width:40%;
+    background:#fff;
+    color:#000;
+    padding:30px;
+    border-radius:10px;
+    height:100%;
+    overflow-y:auto;
 }
+
+/* Imagen ampliada */
 .lightbox-img {
-    max-width:100%; border-radius:8px; margin:20px 0; transition:transform 0.2s ease;
+    max-width:100%;
+    border-radius:8px;
+    margin:20px 0;
+    transition:transform 0.2s ease;
 }
-.thumbs { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
+
+/* Miniaturas */
+.thumbs {
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    justify-content:center;
+}
 .thumbs img {
-    width:70px; height:70px; object-fit:cover; border-radius:6px; cursor:pointer;
-    opacity:0.7; transition:0.2s;
+    width:70px;
+    height:70px;
+    object-fit:cover;
+    border-radius:6px;
+    cursor:pointer;
+    opacity:0.7;
+    transition:0.2s;
 }
 .thumbs img:hover { opacity:1; }
-.thumbs img.active-thumb { border:2px solid #fff; opacity:1; }
-.close {
-    position:absolute; top:20px; right:35px; color:#fff; font-size:40px; cursor:pointer;
+.thumbs img.active-thumb {
+    border:2px solid #fff;
+    opacity:1;
 }
+
+/* Botón de cierre */
+.close {
+    position:absolute;
+    top:20px;
+    right:35px;
+    color:#fff;
+    font-size:40px;
+    cursor:pointer;
+}
+
+/* Flechas móviles */
 .nav-arrow {
-    display:none; position:absolute; top:45%; font-size:50px; color:white;
-    cursor:pointer; user-select:none; z-index:99999;
+    display:none;
+    position:absolute;
+    top:45%;
+    font-size:50px;
+    color:white;
+    cursor:pointer;
+    user-select:none;
+    z-index:99999;
 }
 .left-arrow { left:10px; }
 .right-arrow { right:10px; }
 
-/* MOBILE */
+/* MODO MÓVIL */
 @media (max-width:768px) {
-    .lightbox-content { flex-direction:column; height:auto; padding-bottom:40px; }
-    .lightbox-left { width:100%; height:auto; }
-    .lightbox-right { width:100%; height:auto; margin-top:20px; }
+
+    /* Viewer en columnas verticales */
+    .lightbox-content {
+        flex-direction:column;
+        height:auto;
+        padding-bottom:40px;
+    }
+
+    .lightbox-left {
+        width:100%;
+        height:auto;
+    }
+
+    .lightbox-right {
+        width:100%;
+        height:auto;
+        margin-top:20px;
+    }
+
+    /* Ocultar miniaturas en móvil */
     .thumbs { display:none; }
+
+    /* Mostrar flechas en móvil */
     .nav-arrow { display:block; }
 }
 </style>
 
-<!-- SCRIPTS -->
+<!-- SCRIPTS DEL TEMA -->
 <script src="assets/js/jquery.min.js"></script>
 <script src="assets/js/browser.min.js"></script>
 <script src="assets/js/breakpoints.min.js"></script>
 <script src="assets/js/util.js"></script>
 <script src="assets/js/main.js"></script>
 
-<!-- Hammer.js -->
+<!-- Hammer.js para gestos táctiles -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
 
-<!-- GitHub Actions -->
+<!-- SCRIPT DEL FORMULARIO (envía datos a GitHub Actions) -->
 <script>
 async function sendToGitHub(data) {
   await fetch("https://api.github.com/repos/davapre/convo/dispatches", {
@@ -250,49 +365,75 @@ async function sendToGitHub(data) {
     })
   });
 }
+
 document.addEventListener("DOMContentLoaded",function(){
   const form=document.getElementById("convoForm");
   if(!form)return;
+
   form.addEventListener("submit",async function(e){
     e.preventDefault();
+
     const formData=new FormData(form);
     const data={};
     formData.forEach((v,k)=>data[k]=v);
+
     await sendToGitHub(data);
+
     form.reset();
     window.location.hash="#home";
   });
 });
 </script>
 
-<!-- LIGHTBOX + SWIPE + PINCH -->
+<!-- SCRIPT DEL VIEWER + SWIPE + PINCH -->
 <script>
 $(document).ready(function(){
+
+    /* ============================
+       VARIABLES Y MINIATURAS
+       ============================ */
 
     const images=$(".image.fit");
     const topThumbs=$(".top-thumbs");
     const bottomThumbs=$(".bottom-thumbs");
     let currentIndex=0;
 
+    /* Crear miniaturas dinámicamente */
     images.each(function(i){
         const src=$(this).find("img").attr("src");
         const text=$(this).data("text")||"";
-        const thumb=$("<img>").attr("src",src).attr("data-index",i).attr("data-text",text);
-        if(i<6) topThumbs.append(thumb); else bottomThumbs.append(thumb);
+
+        const thumb=$("<img>")
+            .attr("src",src)
+            .attr("data-index",i)
+            .attr("data-text",text);
+
+        if(i<6) topThumbs.append(thumb);
+        else bottomThumbs.append(thumb);
     });
 
+    /* ============================
+       FUNCIÓN PARA MOSTRAR IMAGEN
+       ============================ */
     function showImage(i){
         currentIndex=i;
+
         const img=images.eq(i).find("img").attr("src");
         const text=images.eq(i).data("text");
+
         $(".lightbox-img").attr("src",img);
         $(".lightbox-title").text("Proyecto "+(i+1));
         $(".lightbox-text").text(text);
+
         $(".thumbs img").removeClass("active-thumb");
         $(`.thumbs img[data-index="${i}"]`).addClass("active-thumb");
+
         resetZoom();
     }
 
+    /* ============================
+       ABRIR VIEWER
+       ============================ */
     images.click(function(e){
         e.preventDefault();
         const i=images.index(this);
@@ -300,20 +441,33 @@ $(document).ready(function(){
         showImage(i);
     });
 
+    /* ============================
+       MINIATURAS (solo desktop)
+       ============================ */
     $(".thumbs").on("click","img",function(){
         showImage($(this).data("index"));
     });
 
+    /* ============================
+       FLECHAS MÓVIL
+       ============================ */
     $(".left-arrow").click(()=>showImage((currentIndex-1+images.length)%images.length));
     $(".right-arrow").click(()=>showImage((currentIndex+1)%images.length));
 
+    /* ============================
+       NAVEGACIÓN CON TECLADO
+       ============================ */
     $(document).on("keydown",function(e){
         if(!$("#lightbox").is(":visible"))return;
+
         if(e.key==="ArrowRight") showImage((currentIndex+1)%images.length);
         if(e.key==="ArrowLeft") showImage((currentIndex-1+images.length)%images.length);
         if(e.key==="Escape") $("#lightbox").fadeOut();
     });
 
+    /* ============================
+       CERRAR VIEWER
+       ============================ */
     $(".close,#lightbox").click(function(e){
         if(e.target!==this)return;
         $("#lightbox").fadeOut();
@@ -321,26 +475,38 @@ $(document).ready(function(){
 
     $(".lightbox-img").click(e=>e.stopPropagation());
 
-    /* SWIPE + PINCH + ZOOM */
+    /* ============================
+       GESTOS TÁCTILES (Hammer.js)
+       ============================ */
+
     const imgEl=document.querySelector(".lightbox-img");
     const hammer=new Hammer(imgEl);
 
+    /* Activar gestos */
     hammer.get("pinch").set({enable:true});
     hammer.get("pan").set({direction:Hammer.DIRECTION_ALL});
     hammer.get("swipe").set({direction:Hammer.DIRECTION_HORIZONTAL});
 
-    let scale=1, lastScale=1, posX=0, posY=0, lastPosX=0, lastPosY=0;
+    /* Variables de zoom y posición */
+    let scale=1, lastScale=1;
+    let posX=0, posY=0;
+    let lastPosX=0, lastPosY=0;
 
+    /* Reset de zoom */
     function resetZoom(){
-        scale=1; lastScale=1; posX=0; posY=0; lastPosX=0; lastPosY=0;
+        scale=1; lastScale=1;
+        posX=0; posY=0;
+        lastPosX=0; lastPosY=0;
         imgEl.style.transform="translate(0px,0px) scale(1)";
     }
 
+    /* Doble tap para zoom */
     hammer.on("doubletap",function(){
         scale=scale>1?1:2;
         imgEl.style.transform=`scale(${scale})`;
     });
 
+    /* Pinch (zoom con dos dedos) */
     hammer.on("pinch",function(ev){
         scale=Math.max(1,Math.min(lastScale*ev.scale,4));
         imgEl.style.transform=`translate(${posX}px,${posY}px) scale(${scale})`;
@@ -350,6 +516,7 @@ $(document).ready(function(){
         lastScale=scale;
     });
 
+    /* Pan (mover imagen cuando está ampliada) */
     hammer.on("pan",function(ev){
         if(scale<=1)return;
         posX=lastPosX+ev.deltaX;
@@ -362,6 +529,7 @@ $(document).ready(function(){
         lastPosY=posY;
     });
 
+    /* Swipe para cambiar imagen */
     hammer.on("swipeleft",()=>showImage((currentIndex+1)%images.length));
     hammer.on("swiperight",()=>showImage((currentIndex-1+images.length)%images.length));
 

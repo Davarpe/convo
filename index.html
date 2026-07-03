@@ -44,42 +44,80 @@
                     </p>
                     <section>
                         <div class="row">
+
+                            <!-- Añadido: data-text en cada imagen -->
                             <div class="col-4 col-6-medium col-12-small">
-                                <a href="#" class="image fit"><img src="images/pic01.jpg" alt=""></a>
+                                <a href="#" class="image fit" data-text="Proyecto 1: Branding y estrategia visual.">
+                                    <img src="images/pic01.jpg" alt="">
+                                </a>
                             </div>
+
                             <div class="col-4 col-6-medium col-12-small">
-                                <a href="#" class="image fit"><img src="images/pic02.jpg" alt=""></a>
+                                <a href="#" class="image fit" data-text="Proyecto 2: Campaña de redes sociales.">
+                                    <img src="images/pic02.jpg" alt="">
+                                </a>
                             </div>
+
                             <div class="col-4 col-6-medium col-12-small">
-                                <a href="#" class="image fit"><img src="images/pic03.jpg" alt=""></a>
+                                <a href="#" class="image fit" data-text="Proyecto 3: Diseño de packaging.">
+                                    <img src="images/pic03.jpg" alt="">
+                                </a>
                             </div>
+
                             <div class="col-4 col-6-medium col-12-small">
-                                <a href="#" class="image fit"><img src="images/pic04.jpg" alt=""></a>
+                                <a href="#" class="image fit" data-text="Proyecto 4: Fotografía de producto.">
+                                    <img src="images/pic04.jpg" alt="">
+                                </a>
                             </div>
+
                             <div class="col-4 col-6-medium col-12-small">
-                                <a href="#" class="image fit"><img src="images/pic05.jpg" alt=""></a>
+                                <a href="#" class="image fit" data-text="Proyecto 5: Identidad corporativa.">
+                                    <img src="images/pic05.jpg" alt="">
+                                </a>
                             </div>
+
                             <div class="col-4 col-6-medium col-12-small">
-                                <a href="#" class="image fit"><img src="images/pic06.jpg" alt=""></a>
+                                <a href="#" class="image fit" data-text="Proyecto 6: Diseño editorial.">
+                                    <img src="images/pic06.jpg" alt="">
+                                </a>
                             </div>
+
                             <div class="col-4 col-6-medium col-12-small">
-                                <a href="#" class="image fit"><img src="images/pic07.jpg" alt=""></a>
+                                <a href="#" class="image fit" data-text="Proyecto 7: Publicidad exterior.">
+                                    <img src="images/pic07.jpg" alt="">
+                                </a>
                             </div>
+
                             <div class="col-4 col-6-medium col-12-small">
-                                <a href="#" class="image fit"><img src="images/pic08.jpg" alt=""></a>
+                                <a href="#" class="image fit" data-text="Proyecto 8: Motion graphics.">
+                                    <img src="images/pic08.jpg" alt="">
+                                </a>
                             </div>
+
                             <div class="col-4 col-6-medium col-12-small">
-                                <a href="#" class="image fit"><img src="images/pic09.jpg" alt=""></a>
+                                <a href="#" class="image fit" data-text="Proyecto 9: Diseño web.">
+                                    <img src="images/pic09.jpg" alt="">
+                                </a>
                             </div>
+
                             <div class="col-4 col-6-medium col-12-small">
-                                <a href="#" class="image fit"><img src="images/pic10.jpg" alt=""></a>
+                                <a href="#" class="image fit" data-text="Proyecto 10: Estrategia de contenido.">
+                                    <img src="images/pic10.jpg" alt="">
+                                </a>
                             </div>
+
                             <div class="col-4 col-6-medium col-12-small">
-                                <a href="#" class="image fit"><img src="images/pic11.jpg" alt=""></a>
+                                <a href="#" class="image fit" data-text="Proyecto 11: Fotografía corporativa.">
+                                    <img src="images/pic11.jpg" alt="">
+                                </a>
                             </div>
+
                             <div class="col-4 col-6-medium col-12-small">
-                                <a href="#" class="image fit"><img src="images/pic12.jpg" alt=""></a>
+                                <a href="#" class="image fit" data-text="Proyecto 12: Diseño de eventos.">
+                                    <img src="images/pic12.jpg" alt="">
+                                </a>
                             </div>
+
                         </div>
                     </section>
                 </article>
@@ -128,6 +166,48 @@
 
         </div>
 
+        <!-- Lightbox -->
+        <div id="lightbox" class="lightbox">
+            <span class="close">&times;</span>
+            <img class="lightbox-img" src="" alt="">
+            <p class="lightbox-text"></p>
+        </div>
+
+        <style>
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            padding-top: 60px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background: rgba(0,0,0,0.85);
+            text-align: center;
+        }
+        .lightbox-img {
+            max-width: 80%;
+            margin: 20px auto;
+            border-radius: 8px;
+        }
+        .lightbox-text {
+            color: #fff;
+            font-size: 1.2em;
+            max-width: 70%;
+            margin: 0 auto;
+        }
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #fff;
+            font-size: 40px;
+            cursor: pointer;
+        }
+        </style>
+
         <!-- Scripts -->
         <script src="assets/js/jquery.min.js"></script>
         <script src="assets/js/browser.min.js"></script>
@@ -174,6 +254,31 @@
             form.reset();
             window.location.hash = "#home";
           });
+        });
+        </script>
+
+        <!-- Lightbox Script -->
+        <script>
+        $(document).ready(function() {
+            $(".image.fit").click(function(e) {
+                e.preventDefault();
+
+                const imgSrc = $(this).find("img").attr("src");
+                const text = $(this).data("text") || "";
+
+                $(".lightbox-img").attr("src", imgSrc);
+                $(".lightbox-text").text(text);
+
+                $("#lightbox").fadeIn();
+            });
+
+            $(".close, #lightbox").click(function() {
+                $("#lightbox").fadeOut();
+            });
+
+            $(".lightbox-img").click(function(e) {
+                e.stopPropagation();
+            });
         });
         </script>
 

@@ -94,28 +94,29 @@
 								<header>
 									<h2>cuéntanos</h2>
 								</header>
-								<form action="https://formspree.io/f/xvzjvyer?redirect=https://convo.solutions/" method="POST">
-								  <div class="row">
-								    <div class="col-6 col-12-medium">
-								      <input type="text" name="name" placeholder="nombre" required />
-								    </div>
-								    <div class="col-6 col-12-medium">
-								      <input type="email" name="email" placeholder="email" required />
-								    </div>
-								    <div class="col-12">
-								      <input type="text" name="subject" placeholder="tema" />
-								    </div>
-								    <div class="col-12">
-								      <textarea name="message" placeholder="contenido" rows="6" required></textarea>
-								    </div>
+								<form id="convoForm">
+									  <div class="row">
+									    <div class="col-6 col-12-medium">
+									      <input type="text" name="name" placeholder="nombre" required />
+									    </div>
+									    <div class="col-6 col-12-medium">
+									      <input type="email" name="email" placeholder="email" required />
+									    </div>
+									    <div class="col-12">
+									      <input type="text" name="subject" placeholder="tema" />
+									    </div>
+									    <div class="col-12">
+									      <textarea name="message" placeholder="contenido" rows="6" required></textarea>
+									    </div>
 
-								    <input type="hidden" name="_subject" value="Nuevo mensaje desde tu web" />
+									    <input type="hidden" name="_subject" value="Nuevo mensaje desde tu web" />
 
-								    <div class="col-12">
-								      <button type="submit">enviar</button>
-								    </div>
-								  </div>
-								</form>
+									    <div class="col-12">
+									      <button type="submit" id="sendForm">enviar</button>
+									    </div>
+									  </div>
+									</form>
+
 
 
 							<header>
@@ -137,11 +138,50 @@
 			</div>
 
 		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+		<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/browser.min.js"></script>
+<script src="assets/js/breakpoints.min.js"></script>
+<script src="assets/js/util.js"></script>
+<script src="assets/js/main.js"></script>
 
-	</body>
+<!-- ⭐ Script para enviar el formulario en popup y cerrar -->
+<script>
+document.getElementById("sendForm").addEventListener("click", function(event) {
+event.preventDefault(); // Evita el envío normal
+
+// Abre una ventana nueva
+const popup = window.open("", "formWindow", "width=400,height=300");
+
+// Crea un formulario oculto dentro de la ventana
+popup.document.write(`
+	<form id="hiddenForm" action="https://formspree.io/f/xvzjvyer" method="POST">
+		<input type="hidden" name="name" value="${document.querySelector('input[name=name]').value}">
+		<input type="hidden" name="email" value="${document.querySelector('input[name=email]').value}">
+		<input type="hidden" name="subject" value="${document.querySelector('input[name=subject]').value}">
+		<input type="hidden" name="message" value="${document.querySelector('textarea[name=message]').value}">
+		<input type="hidden" name="_subject" value="Nuevo mensaje desde tu web">
+	</form>
+	<p>Enviando mensaje...</p>
+`);
+
+// Envía el formulario dentro del popup
+popup.document.getElementById("hiddenForm").submit();
+
+// Cierra la ventana después de 2 segundos
+setTimeout(() => {
+	popup.close();
+}, 2000);
+
+// Limpia el formulario original
+document.querySelector('input[name=name]').value = "";
+document.querySelector('input[name=email]').value = "";
+document.querySelector('input[name=subject]').value = "";
+document.querySelector('textarea[name=message]').value = "";
+
+// Vuelve al home
+window.location.hash = "#home";
+});
+</script>
+
+</body>
 </html>

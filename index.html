@@ -166,11 +166,26 @@
 
         </div>
 
-        <!-- Lightbox -->
+        <!-- Lightbox avanzado -->
         <div id="lightbox" class="lightbox">
             <span class="close">&times;</span>
-            <img class="lightbox-img" src="" alt="">
-            <p class="lightbox-text"></p>
+
+            <div class="lightbox-content">
+                <!-- Columna izquierda -->
+                <div class="lightbox-left">
+                    <div class="thumbs top-thumbs"></div>
+
+                    <img class="lightbox-img" src="" alt="">
+
+                    <div class="thumbs bottom-thumbs"></div>
+                </div>
+
+                <!-- Columna derecha -->
+                <div class="lightbox-right">
+                    <h3 class="lightbox-title"></h3>
+                    <p class="lightbox-text"></p>
+                </div>
+            </div>
         </div>
 
         <style>
@@ -178,26 +193,67 @@
             display: none;
             position: fixed;
             z-index: 9999;
-            padding-top: 60px;
+            padding-top: 40px;
             left: 0;
             top: 0;
             width: 100%;
             height: 100%;
-            overflow: auto;
             background: rgba(0,0,0,0.85);
+        }
+
+        .lightbox-content {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+            background: #111;
+            padding: 20px;
+            border-radius: 10px;
+            display: flex;
+            gap: 30px;
+        }
+
+        .lightbox-left {
+            width: 60%;
             text-align: center;
         }
-        .lightbox-img {
-            max-width: 80%;
-            margin: 20px auto;
-            border-radius: 8px;
-        }
-        .lightbox-text {
+
+        .lightbox-right {
+            width: 40%;
             color: #fff;
-            font-size: 1.2em;
-            max-width: 70%;
-            margin: 0 auto;
         }
+
+        .lightbox-img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .thumbs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .thumbs img {
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 6px;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: 0.2s;
+        }
+
+        .thumbs img:hover {
+            opacity: 1;
+        }
+
+        .thumbs img.active-thumb {
+            border: 2px solid #fff;
+            opacity: 1;
+        }
+
         .close {
             position: absolute;
             top: 20px;
@@ -260,19 +316,55 @@
         <!-- Lightbox Script -->
         <script>
         $(document).ready(function() {
-            $(".image.fit").click(function(e) {
-                e.preventDefault();
 
-                const imgSrc = $(this).find("img").attr("src");
+            const images = $(".image.fit");
+            const topThumbs = $(".top-thumbs");
+            const bottomThumbs = $(".bottom-thumbs");
+
+            // Crear miniaturas arriba y abajo
+            images.each(function(index) {
+                const src = $(this).find("img").attr("src");
                 const text = $(this).data("text") || "";
 
-                $(".lightbox-img").attr("src", imgSrc);
-                $(".lightbox-text").text(text);
+                const thumb = $("<img>")
+                    .attr("src", src)
+                    .attr("data-index", index)
+                    .attr("data-text", text);
 
-                $("#lightbox").fadeIn();
+                if (index < 6) topThumbs.append(thumb);
+                else bottomThumbs.append(thumb);
             });
 
-            $(".close, #lightbox").click(function() {
+            function showImage(index) {
+                const img = images.eq(index).find("img").attr("src");
+                const text = images.eq(index).data("text");
+
+                $(".lightbox-img").attr("src", img);
+                $(".lightbox-title").text("Proyecto " + (index + 1));
+                $(".lightbox-text").text(text);
+
+                $(".thumbs img").removeClass("active-thumb");
+                $(`.thumbs img[data-index="${index}"]`).addClass("active-thumb");
+            }
+
+            // Abrir lightbox desde la cuadrícula
+            images.click(function(e) {
+                e.preventDefault();
+                const index = images.index(this);
+
+                $("#lightbox").fadeIn();
+                showImage(index);
+            });
+
+            // Cambiar imagen desde miniaturas
+            $(".thumbs").on("click", "img", function() {
+                const index = $(this).data("index");
+                showImage(index);
+            });
+
+            // Cerrar
+            $(".close, #lightbox").click(function(e) {
+                if (e.target !== this) return;
                 $("#lightbox").fadeOut();
             });
 

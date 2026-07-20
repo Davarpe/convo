@@ -2174,3 +2174,42 @@ input, select, textarea {
 			}
 
 		}
+
+		/* Panel HOME limpio */
+	.panel.intro {
+	    display: flex;
+	    justify-content: center;
+	    align-items: center;
+	    padding: 4em 0;
+	    background: transparent !important;
+	}
+
+	/* Logo centrado */
+	.home-logo {
+	    width: 320px;      /* ajusta según tu diseño */
+	    height: auto;
+	    display: block;
+	}
+
+	/* Eliminar completamente la antigua columna derecha */
+	.panel.intro .jumplink.pic {
+	    display: none !important;
+	    pointer-events: none !important;
+	    width: 0 !important;
+	    height: 0 !important;
+	    overflow: hidden !important;
+	}
+
+	/* Eliminar cualquier pseudo-elemento residual */
+	.panel.intro .jumplink.pic:before,
+	.panel.intro .jumplink.pic:after {
+	    display: none !important;
+	}
+
+	/* Tamaño del logo dentro del panel HOME */
+	.home-logo {
+			width: 75%;        /* ocupa el 75% del panel */
+	    max-width: 600px;  /* límite opcional para pantallas grandes */
+	    height: auto;
+	    display: block;
+	}
